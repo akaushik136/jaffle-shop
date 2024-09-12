@@ -1,5 +1,13 @@
-with
+{{
+    config(
+        materialized='incremental',
+        pre_hook=[
+            "delete from {{ this }} where 1=1" 
+        ]
+    )
+}}
 
+with
 customers as (
 
     select * from {{ ref('stg_customers') }}
